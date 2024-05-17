@@ -8,6 +8,7 @@ import ManyToOne.java.ManyToOne.repository.CommandeRepository;
 import ManyToOne.java.ManyToOne.repository.ProduitRepository;
 import ManyToOne.java.ManyToOne.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class CommandeServiceImpl implements CommandeService {
             // Sauvegarder la commande avec le produit associé
             Commande savedCommande = commandeRepository.save(commande);
 
-            return ResponseEntity.ok(savedCommande);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedCommande);
         } else {
             throw new NotFoundException("Ce produit et cet utilisateur n'existe pas");
         }
@@ -73,6 +74,7 @@ public class CommandeServiceImpl implements CommandeService {
 
     @Override
     public ResponseEntity<List<Commande>> getAllCommande() {
+
         return ResponseEntity.ok(commandeRepository.findAll());
     }
 

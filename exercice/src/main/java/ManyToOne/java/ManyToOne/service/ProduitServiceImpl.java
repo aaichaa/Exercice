@@ -3,6 +3,8 @@ package ManyToOne.java.ManyToOne.service;
 import ManyToOne.java.ManyToOne.model.Produit;
 import ManyToOne.java.ManyToOne.repository.ProduitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ public class ProduitServiceImpl implements ProduitService{
     public ProduitRepository produitRepository;
     @Override
     public ResponseEntity<Produit> createProduit(Produit produit) {
-        return ResponseEntity.ok(produitRepository.save(produit));
+        return ResponseEntity.status(HttpStatus.CREATED).body(produitRepository.save(produit));
     }
 
     @Override
