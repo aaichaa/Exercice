@@ -1,4 +1,4 @@
-package ManyToOne.java.ManyToOne;
+package ManyToOne.java.ManyToOne.produit;
 
 import ManyToOne.java.ManyToOne.model.Produit;
 import ManyToOne.java.ManyToOne.repository.CommandeRepository;
