@@ -43,6 +43,8 @@ public class UtilisateurServiceImplTest {
 
     private Utilisateur utilisateur2;
 
+    private Utilisateur newUser;
+
     List<Utilisateur> utilisateurList;
 
 
@@ -58,6 +60,10 @@ public class UtilisateurServiceImplTest {
         utilisateur2.setId(2);
         utilisateur2.setNom("Balde");
         utilisateur2.setEmail("abd@gmail.com");
+
+        newUser = new Utilisateur();
+        newUser.setNom("updatedname");
+        newUser.setEmail("abd@gmail.commmmmmmmmmmmmm");
 
 
 
@@ -110,6 +116,37 @@ public class UtilisateurServiceImplTest {
          log.info(getUtilisateur.getBody());
          assertThat(getUtilisateur).isNotNull();
          assertThat(getUtilisateur.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+    }
+
+    @DisplayName("Junit test for update Utilisateur")
+    @Test
+    public void testUpdateUtilisateur_Success() {
+        when( utilisateurRepository.findById(utilisateur2.getId())).thenReturn(Optional.of(utilisateur2));
+
+        when(utilisateurRepository.save(utilisateur2)).thenReturn(utilisateur2);
+        ResponseEntity<Utilisateur> putUtilisateur = utilisateurServiceImplementation.putUtilisateur(utilisateur2.getId(),newUser);
+        log.info(putUtilisateur.getBody());
+
+
+
+    }
+
+
+    @DisplayName("Junit test for delete Utilisateur")
+    @Test
+    public void testDeleteUtilisateur_Success() {
+        when(utilisateurRepository.findById(utilisateur2.getId())).thenReturn(Optional.of(utilisateur2));
+
+        ResponseEntity<String> deleteUtilisateur = utilisateurServiceImplementation.deleteUtilisateur(utilisateur2.getId());
+
+        log.info(deleteUtilisateur.getBody());
+        assertThat(deleteUtilisateur).isNotNull();
+        assertThat(deleteUtilisateur.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertEquals("Utilisateur supprimé avec succès", deleteUtilisateur.getBody());
+
+        verify(utilisateurRepository, times(1)).deleteById(utilisateur2.getId());
+
 
     }
 
