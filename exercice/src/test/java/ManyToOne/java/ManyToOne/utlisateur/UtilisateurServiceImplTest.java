@@ -150,15 +150,4 @@ public class UtilisateurServiceImplTest {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
 }

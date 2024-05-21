@@ -35,7 +35,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             Utilisateur user = optionalUtilisateur.get();
             return ResponseEntity.ok(user);
         } else {
-            throw new NotFoundException("cet utilisateur n'existe pas ");
+            throw new NotFoundException("cet utilisateur n'existe pas");
         }
     }
 
@@ -48,7 +48,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             user.setEmail(newUtilisateur.getEmail());
             return ResponseEntity.ok(utilisateurRepository.save(user));
         } else {
-            throw new NotFoundException("cet utilisateur n'existe pas ");
+            throw new NotFoundException("cet utilisateur n'existe pas");
         }
     }
 
@@ -60,7 +60,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
             return ResponseEntity.ok("Utilisateur supprimé avec succès");
         } else {
-            throw new NotFoundException("cet utilisateur n'existe pas ");
+            throw new NotFoundException("cet utilisateur n'existe pas");
         }
     }
 

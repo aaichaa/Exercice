@@ -27,7 +27,7 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public ResponseEntity<Commande> createCommande(Commande commande,int userId, int produitId) {
         Optional<Produit> optionalProduit = produitRepository.findById(produitId);
-        Optional<Utilisateur> optionalUser =utilisateurRepository.findById(userId);
+        Optional<Utilisateur> optionalUser = utilisateurRepository.findById(userId);
 
         if (optionalProduit.isPresent() && optionalUser.isPresent()) {
             Produit produit = optionalProduit.get();
@@ -47,6 +47,13 @@ public class CommandeServiceImpl implements CommandeService {
         } else {
             throw new NotFoundException("Ce produit et cet utilisateur n'existe pas");
         }
+    }
+
+
+    @Override
+    public ResponseEntity<List<Commande>> getAllCommande() {
+
+        return ResponseEntity.ok(commandeRepository.findAll());
     }
 
     @Override
@@ -72,11 +79,6 @@ public class CommandeServiceImpl implements CommandeService {
         }
     }
 
-    @Override
-    public ResponseEntity<List<Commande>> getAllCommande() {
-
-        return ResponseEntity.ok(commandeRepository.findAll());
-    }
 
 
 
