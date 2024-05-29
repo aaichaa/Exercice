@@ -38,6 +38,23 @@ public class CommandeController {
             ,@PathVariable int produitId) {
         return commandeService.createCommande(commande, userId, produitId);
     }
+
+    @Operation(summary = "Get all command", responses = {
+            @ApiResponse(responseCode = "200", description = "Product successfully retrieved.", useReturnTypeSchema = true),
+            @ApiResponse(responseCode = "400", description = "Missing Request Header", content = @Content),
+            @ApiResponse(responseCode = "401", description = "You don't have the authorization to access this resource", content = @Content),
+            @ApiResponse(responseCode = "403", description = "You don't have accreditation to access this resource", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Product not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Commande>> getAllCommande() {
+
+        return commandeService.getAllCommande();
+    }
+
+
     @Operation(summary = "Get all command by user id", responses = {
             @ApiResponse(responseCode = "200", description = "SortSerie is Updated successfully.", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Commande.class)) }),
@@ -65,19 +82,6 @@ public class CommandeController {
     @GetMapping("/com/{commandeId}")
     public ResponseEntity<Commande> getCommande(@PathVariable Integer commandeId) {
         return commandeService.getCommande(commandeId);
-    }
-    @Operation(summary = "Get all command", responses = {
-            @ApiResponse(responseCode = "200", description = "Product successfully retrieved.", useReturnTypeSchema = true),
-            @ApiResponse(responseCode = "400", description = "Missing Request Header", content = @Content),
-            @ApiResponse(responseCode = "401", description = "You don't have the authorization to access this resource", content = @Content),
-            @ApiResponse(responseCode = "403", description = "You don't have accreditation to access this resource", content = @Content),
-            @ApiResponse(responseCode = "404", description = "Product not found", content = @Content),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
-    })
-
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Commande>> getAllCommande() {
-        return commandeService.getAllCommande();
     }
 
 
